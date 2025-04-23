@@ -33,8 +33,8 @@ java {
 }
 
 application {
-    // Define the main class for the application.
-    mainClass = "org.example.App"
+    // Set the default main class to the GUI
+    mainClass.set("org.example.ValidateSaIdGUI")
 }
 
 tasks.named<Test>("test") {

@@ -22,11 +22,12 @@ public class ValidateSaIdGUI extends JFrame {
 
         // Create input panel
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new FlowLayout());
+        inputPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         inputPanel.add(new JLabel("Enter SA ID number: "));
         idInputField = new JTextField(18);
         inputPanel.add(idInputField);
-        JButton validateButton = new JButton("Validate");
+        JButton validateButton = new JButton("Check"); // Make button more visible and clear
+        validateButton.setPreferredSize(new Dimension(80, 30));
         inputPanel.add(validateButton);
 
         // Result label
@@ -55,9 +56,23 @@ public class ValidateSaIdGUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        // Set Nimbus look and feel for modern appearance
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, fall back to default
+        }
         // Start the GUI
         SwingUtilities.invokeLater(() -> {
-            new ValidateSaIdGUI().setVisible(true);
+            ValidateSaIdGUI frame = new ValidateSaIdGUI();
+            frame.pack(); // Size window to fit all components
+            frame.setMinimumSize(new Dimension(420, 220)); // Ensure enough height
+            frame.setVisible(true);
         });
     }
 }
