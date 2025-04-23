@@ -40,4 +40,16 @@ public class ValidateSaIdTest {
         assertFalse(ValidateSaId.isIdNumberValid("20010A4800086"), "ID with a letter should be invalid");
         assertFalse(ValidateSaId.isIdNumberValid("29090358@0085"), "ID with a symbol should be invalid");
     }
+
+    @Test
+    void testInvalidDateOfBirth() {
+        // Test with impossible month (e.g., 13)
+        assertFalse(ValidateSaId.isIdNumberValid("9913994800086"), "ID with month 13 should be invalid");
+        // Test with impossible day (e.g., 32)
+        assertFalse(ValidateSaId.isIdNumberValid("9902324800086"), "ID with day 32 should be invalid");
+        // Test with month 00 (invalid)
+        assertFalse(ValidateSaId.isIdNumberValid("9900004800086"), "ID with month 00 should be invalid");
+        // Test with day 00 (invalid)
+        assertFalse(ValidateSaId.isIdNumberValid("9902004800086"), "ID with day 00 should be invalid");
+    }
 }
