@@ -33,12 +33,12 @@ A Java application for validating South African ID numbers. Includes both a Comm
 ### 1. Clone the Repository
 Clone the repository using the following command:
 ```sh
-git clone <repo-url>
+git clone <https://github.com/CodeWithRonnie/ID-VALIDATION.git>
 ```
 Replace `<repo-url>` with your project's repository URL.
 
 ### 2. Build the Project
-```sh
+
 cd app
 # Build using Gradle
 gradle build
@@ -57,7 +57,7 @@ java -cp build/classes/java/main org.example.ValidateSaIdGUI
 
 ### Run the CLI
 You can also validate an ID number from the command line:
-```sh
+
 java -cp build/classes/java/main org.example.ValidateSaIdCLI 8001015009087
 ```
 
@@ -66,13 +66,12 @@ java -cp build/classes/java/main org.example.ValidateSaIdCLI 8001015009087
 ## 🧪 Running Tests
 
 ### To run all tests:
-```sh
+
 cd app
 gradle test
 ```
 
 ### To clean and run tests:
-```sh
 cd app
 gradle clean test
 ```
@@ -113,4 +112,4 @@ validate_sa_id/
 ---
 
 ## 👤 Author
-CAPACITI-JHB
+MAMIKIE MAEMU(CodeWithRonnie)
