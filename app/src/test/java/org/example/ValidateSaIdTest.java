@@ -3,11 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit tests for the ValidateSaId class.
- *
- * Following TDD: RED step - start with a failing test for valid IDs.
- */
+
 public class ValidateSaIdTest {
     // Test with valid South African ID numbers (should return true)
     @Test
@@ -63,7 +59,7 @@ public class ValidateSaIdTest {
 
     @Test
     void testInvalidCitizenshipDigit() {
-        // Citizenship digit (C): 0 = SA citizen, 1 = permanent resident
+        // Citizenship digit should be  (C): 0 = SA citizen, 1 = permanent resident
         // Test with C not 0 or 1
         assertFalse(ValidateSaId.isIdNumberValid("9001014800286"), "ID with citizenship digit 2 should be invalid");
         assertFalse(ValidateSaId.isIdNumberValid("9001014800986"), "ID with citizenship digit 9 should be invalid");

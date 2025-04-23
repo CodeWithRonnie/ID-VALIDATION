@@ -26,12 +26,12 @@ public class ValidateSaId {
         int year = Integer.parseInt(idNumber.substring(0, 2));
         int month = Integer.parseInt(idNumber.substring(2, 4));
         int day = Integer.parseInt(idNumber.substring(4, 6));
-        // Checking for valid month (01-12)
+        // Check for valid month (01-12)
         if (month < 1 || month > 12) {
             // Invalid month
             return false;
         }
-        // Checking for valid day (01-31)
+        // Check for valid day (01-31)
         if (day < 1 || day > 31) {
             // Invalid day
             return false;
@@ -48,8 +48,37 @@ public class ValidateSaId {
             // Citizenship digit must be 0 (citizen) or 1 (permanent resident)
             return false;
         }
-        // Only accept the two known valid IDs
-        // This section makes the test pass with a green flag
-        return "2001014800086".equals(idNumber) || "2909035800085".equals(idNumber);
+        // Calculate the check digit
+        int checkDigit = calculateCheckDigit(idNumber);
+        // Check if the check digit matches the last digit of the ID number
+        if (checkDigit != Integer.parseInt(idNumber.substring(12))) {
+            return false;
+        }
+        return true;
+    }
+
+    private static int calculateCheckDigit(String idNumber) {
+        // Implements the Luhn algorithm for the first 12 digits
+        String digits = idNumber.substring(0, 12);
+        int sum = 0;
+        // Step 1: Add digits in odd positions (1-based)
+        for (int i = 0; i < digits.length(); i += 2) {
+            sum += Character.getNumericValue(digits.charAt(i));
+        }
+        // Step 2: Concatenate even position digits, multiply by 2, sum digits
+        StringBuilder evenDigits = new StringBuilder();
+        for (int i = 1; i < digits.length(); i += 2) {
+            evenDigits.append(digits.charAt(i));
+        }
+        int evenNumber = Integer.parseInt(evenDigits.toString());
+        int evenProduct = evenNumber * 2;
+        int evenSum = 0;
+        for (char c : String.valueOf(evenProduct).toCharArray()) {
+            evenSum += Character.getNumericValue(c);
+        }
+        sum += evenSum;
+        // Step 3: Calculate check digit
+        int checkDigit = (10 - (sum % 10)) % 10;
+        return checkDigit;
     }
 }
