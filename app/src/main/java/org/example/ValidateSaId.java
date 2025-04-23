@@ -22,6 +22,20 @@ public class ValidateSaId {
             // If any character is not a digit, it's invalid
             return false;
         }
+        // Extract date of birth fields
+        int year = Integer.parseInt(idNumber.substring(0, 2));
+        int month = Integer.parseInt(idNumber.substring(2, 4));
+        int day = Integer.parseInt(idNumber.substring(4, 6));
+        // Check for valid month (01-12)
+        if (month < 1 || month > 12) {
+            // Invalid month
+            return false;
+        }
+        // Check for valid day (01-31)
+        if (day < 1 || day > 31) {
+            // Invalid day
+            return false;
+        }
         // Temporary logic: Only accept the two known valid IDs
         // This is just enough to make our first test pass (TDD GREEN step)
         return "2001014800086".equals(idNumber) || "2909035800085".equals(idNumber);
