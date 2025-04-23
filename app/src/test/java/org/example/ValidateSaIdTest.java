@@ -52,4 +52,20 @@ public class ValidateSaIdTest {
         // Test with day 00 (invalid)
         assertFalse(ValidateSaId.isIdNumberValid("9902004800086"), "ID with day 00 should be invalid");
     }
+
+    @Test
+    void testInvalidGenderDigits() {
+        // Gender digits (SSSS): 0000-4999 = female, 5000-9999 = male
+        // Test with SSSS out of range (e.g., 10000)
+        assertFalse(ValidateSaId.isIdNumberValid("9001011000086"), "ID with SSSS=10000 should be invalid");
+        assertFalse(ValidateSaId.isIdNumberValid("90010199998A6"), "ID with SSSS=99998 (too long) should be invalid");
+    }
+
+    @Test
+    void testInvalidCitizenshipDigit() {
+        // Citizenship digit (C): 0 = SA citizen, 1 = permanent resident
+        // Test with C not 0 or 1
+        assertFalse(ValidateSaId.isIdNumberValid("9001014800286"), "ID with citizenship digit 2 should be invalid");
+        assertFalse(ValidateSaId.isIdNumberValid("9001014800986"), "ID with citizenship digit 9 should be invalid");
+    }
 }
