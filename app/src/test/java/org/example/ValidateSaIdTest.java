@@ -32,4 +32,12 @@ public class ValidateSaIdTest {
         assertFalse(ValidateSaId.isIdNumberValid("20010148000867"), "ID with 14 digits should be invalid");
         assertFalse(ValidateSaId.isIdNumberValid("200101480008600"), "ID with 15 digits should be invalid");
     }
+
+    @Test
+    void testIdWithNonNumericCharacters() {
+        // Test with IDs that contain non-numeric characters
+        // Should return false because all characters must be digits
+        assertFalse(ValidateSaId.isIdNumberValid("20010A4800086"), "ID with a letter should be invalid");
+        assertFalse(ValidateSaId.isIdNumberValid("29090358@0085"), "ID with a symbol should be invalid");
+    }
 }
