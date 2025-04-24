@@ -109,5 +109,15 @@ validate_sa_id/
 
 ---
 
+## 🖼️ Java Swing GUI Demo
+
+### Invalid SA ID Number Example
+![Invalid SA ID](screenshots/invalid-id.png)
+
+### Valid SA ID Number Example
+![Valid SA ID](screenshots/valid-id.png)
+
+---
+
 ## Author
 MAMIKIE MAEMU(CodeWithRonnie)
