@@ -1,0 +1,67 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+    implementation 'com.google.guava:guava:32.1.2-jre'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+def javafxLibPath = System.getenv("PATH_TO_FX") ?: "C:/javafx-sdk-21/lib"
+
+javafx {
+    version = "21.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    configuration = 'implementation'
+}
+
+application {
+    // Default main class is the GUI, but can be overridden at runtime
+    mainClass = 'org.example.ValidateSaIdGUI'
+}
+
+task runFx(type: JavaExec) {
+    group = 'application'
+    description = 'Run the JavaFX SA ID validator.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.example.ValidateSaIdFX'
+    jvmArgs = [
+        "--module-path", javafxLibPath,
+        "--add-modules", "javafx.controls,javafx.fxml"
+    ]
+}
+
+task runCli(type: JavaExec) {
+    group = 'application'
+    description = 'Run the command-line SA ID validator.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.example.ValidateSaIdCLI'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "failed", "skipped"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
+    afterTest { desc, result ->
+        if (result.resultType == org.gradle.api.tasks.testing.TestResult.ResultType.SUCCESS) {
+            println "${desc.className} > ${desc.name}: True"
+        } else if (result.resultType == org.gradle.api.tasks.testing.TestResult.ResultType.FAILURE) {
+            println "${desc.className} > ${desc.name}: Failed"
+        }
+    }
+}
