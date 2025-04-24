@@ -31,7 +31,13 @@ public class ValidateSaIdSwing {
                 String id = idInput.getText();
                 boolean isValid = ValidateSaId.isIdNumberValid(id);
                 if (isValid) {
-                    resultLabel.setText("Valid SA ID Number!");
+                    // Extract gender
+                    String gender = "";
+                    int genderDigits = Integer.parseInt(id.substring(6, 10));
+                    gender = (genderDigits >= 5000) ? "Male" : "Female";
+                    // Extract citizenship
+                    String citizenship = (id.charAt(10) == '0') ? "SA Citizen" : "Permanent Resident";
+                    resultLabel.setText("Valid SA ID! " + gender + ", " + citizenship);
                     resultLabel.setForeground(new Color(0, 128, 0));
                 } else {
                     resultLabel.setText("Invalid SA ID Number.");
